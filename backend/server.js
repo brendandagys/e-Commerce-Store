@@ -20,6 +20,14 @@ const PORT = process.env.PORT ?? 80
 
 const app = express()
 
+app.use((req, res, next) => {
+  res.set({
+    'Access-Control-Allow-Origin': 'https://e-commerce.brendandagys.com',
+    Vary: 'Origin',
+  })
+  next()
+})
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'))
 }
@@ -43,26 +51,35 @@ app.get('/api/config/paypal', (req, res) =>
 )
 
 const __dirname = path.resolve()
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
 
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '/frontend/build')))
+app.get('/api/health', (req, res) => {
+  res.send('API server for site is healthy!')
+})
 
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+app.get('*', (req, res) => {
+  res.send(
+    `API server for e-Commerce running in ${process.env.NODE_ENV} on port ${PORT}...`
   )
-} else {
-  app.get('/', (req, res) => {
-    res.send('API is running...')
-  })
-}
+})
+
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, '../frontend/build')))
+
+//   app.get('*', (req, res) =>
+//     res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+//   )
+// } else {
+//   app.get('/', (req, res) => {
+//     res.send('API is running...')
+//   })
+// }
 
 app.use(notFound)
 app.use(errorHandler)
 
-app.listen(
-  PORT,
+app.listen(PORT, () =>
   console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
+    `API server for e-Commerce running in ${process.env.NODE_ENV} on port ${PORT}...`
   )
 )
