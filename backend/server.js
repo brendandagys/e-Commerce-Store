@@ -18,13 +18,14 @@ dotenv.config()
 
 connectDB()
 
+const ORIGIN = process.env.ORIGIN ?? 'http://localhost:3000'
 const PORT = process.env.PORT ?? 80
 
 const app = express()
 
 app.use((req, res, next) => {
   res.set({
-    'Access-Control-Allow-Origin': 'https://e-commerce.brendandagys.com',
+    'Access-Control-Allow-Origin': ORIGIN,
     Vary: 'Origin',
   })
   next()
@@ -56,12 +57,12 @@ const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
 
 app.get('/api/health', (req, res) => {
-  res.send('API server for site is healthy!')
+  res.send('API server for e-Commerce Store is healthy!')
 })
 
 app.get('*', (req, res) => {
   res.send(
-    `API server for e-Commerce running in ${process.env.NODE_ENV} on port ${PORT}...`
+    `API server for e-Commerce Store running in ${process.env.NODE_ENV} on port ${PORT}...`
   )
 })
 
