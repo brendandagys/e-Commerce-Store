@@ -18,7 +18,7 @@ dotenv.config()
 
 connectDB()
 
-const ORIGIN = process.env.ORIGIN ?? 'http://localhost:3000'
+const ORIGIN = process.env.ORIGIN ?? 'http://localhost:3003'
 const PORT = process.env.PORT ?? 80
 
 const app = express()
