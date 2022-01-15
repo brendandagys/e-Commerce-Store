@@ -68,9 +68,9 @@ const LoginScreen = ({ location, history }) => {
           </Link>
         </Col>
       </Row>
-      <h4 className='mt-3'>Want to explore?</h4>
-      <h5 className='mt-4'>Email: jane@example.com</h5>
-      <h5>Password: test</h5>
+      <h4 className='mt-5'>Want to explore?</h4>
+      <p className='mt-4'>EMAIL: jane@example.com</p>
+      <p>PASSWORD: test</p>
     </FormContainer>
   )
 }

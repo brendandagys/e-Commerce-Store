@@ -81,7 +81,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @access  Private
 const updateUserProfile = asyncHandler(async (req, res) => {
   if (
-    req.user._id in ['61e2d5db4a6d862474a51fbe', '61e2d5db4a6d862474a51fbf']
+    req.user._id == '61e2d5db4a6d862474a51fbe' ||
+    req.user._id == '61e2d5db4a6d862474a51fbf'
   ) {
     res.status(400)
     throw new Error("'Test' user cannot be updated")
