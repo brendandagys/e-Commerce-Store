@@ -62,7 +62,7 @@ app.get('/api/health', (req, res) => {
 
 app.get('*', (req, res) => {
   res.send(
-    `API server for e-Commerce Store running in ${process.env.NODE_ENV} on port ${PORT}...`
+    `API server for e-Commerce Store running in ${process.env.NODE_ENV ?? 'development'} on port ${PORT}...`
   )
 })
 
@@ -83,6 +83,6 @@ app.use(errorHandler)
 
 app.listen(PORT, () =>
   console.log(
-    `API server for e-Commerce running in ${process.env.NODE_ENV} on port ${PORT}...`
+    `API server for e-Commerce running in ${process.env.NODE_ENV ?? 'development'} on port ${PORT}...`
   )
 )
